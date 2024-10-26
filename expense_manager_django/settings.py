@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',  # To enable Django sites framework
     'allauth',  # To enable Django Allauth
     'allauth.account',  # To enable Django Allauth account
+    'allauth.socialaccount',  # To enable Django Allauth social account
     'dj_rest_auth.registration',  # To enable Django REST Auth registration
     'transactions',  # To enable the transactions app
 ]
@@ -53,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware'
 ]
 
 ROOT_URLCONF = 'expense_manager_django.urls'
@@ -131,8 +133,12 @@ AUTH_USER_MODEL = 'transactions.User'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
 }
+
+# Site
+SITE_ID = 1
